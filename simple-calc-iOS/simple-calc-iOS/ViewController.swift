@@ -16,6 +16,7 @@ class ViewController: UIViewController {
   var numbers = [Double]()
   var operation = ""
   var needToClearScreen = false;
+  var count = 0;
   
   
   
@@ -57,8 +58,12 @@ class ViewController: UIViewController {
     }
     
     // The rest is considering that it is not a factorial.
-    if sender.currentTitle != "Fact"{
+    if sender.currentTitle != "Fact" {
       numbers.append(val)
+    }
+    
+    if (sender.currentTitle == "Count") {
+      count = count + 1
     }
     
     if sender.currentTitle != "=" && sender.currentTitle != "Fact" {
@@ -84,8 +89,13 @@ class ViewController: UIViewController {
       
       // Count Case
       case "Count":
-        label.text = String(numbers.count)
+        if (count == 1) {
+          label.text = String(count)
+        } else {
+          label.text = String(count + 1)
+        }
         numbers = []
+        count = 0
         operation = ""
         needToClearScreen = true;
       
@@ -137,7 +147,7 @@ class ViewController: UIViewController {
             answer = answer / i
           }
         }
-        if answer.truncatingRemainder(dividingBy: 1) != 0{
+        if answer.truncatingRemainder(dividingBy: 1) != 0 {
           answer = answer.roundTo(places: 8)
         }
         numbers = []
@@ -172,6 +182,7 @@ class ViewController: UIViewController {
     numbers = []
     label.text = "0"
     operation = ""
+    count = 0
   }
 
   override func viewDidLoad() {
