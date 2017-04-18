@@ -70,53 +70,54 @@ class ViewController: UIViewController {
       case "Avg":
         var answer = 0.0
         let count:Double = Double(numbers.count)
-        for i in numbers{
-          answer = answer+i
+        for number in numbers {
+          answer = answer + number
         }
         answer = answer/count
         if answer.truncatingRemainder(dividingBy: 1) != 0{
-          answer = answer.roundTo(places: 8)
+          answer = answer.roundTo(places: 4)
         }
         numbers = []
         label.text = String(answer)
         operation = ""
         needToClearScreen = true;
+      
       // Count Case
       case "Count":
-        var answer = 0
-        let count = (numbers.count)
-        answer = count
+        label.text = String(numbers.count)
         numbers = []
-        label.text = String(answer)
         operation = ""
         needToClearScreen = true;
+      
       // Mod Case
       case "Mod":
         var answer = 0.0
-        for i in numbers{
+        for number in numbers{
           if answer == 0.0{
-            answer = i
+            answer = number
           }else{
-            answer = answer.truncatingRemainder(dividingBy: i)
+            answer = answer.truncatingRemainder(dividingBy: number)
           }
         }
-        if answer.truncatingRemainder(dividingBy: 1) != 0{
+        if answer.truncatingRemainder(dividingBy: 1) != 0 {
           answer = answer.roundTo(places: 8)
         }
-        numbers = []
         label.text = String(answer)
+        numbers = []
         operation = ""
         needToClearScreen = true;
+      
       // Add Case
       case "+":
         var answer = 0.0
-        for i in numbers{
-          answer = answer+i
+        for number in numbers{
+          answer = answer + number
         }
-        numbers = []
         label.text = String(answer)
         operation = ""
+        numbers = []
         needToClearScreen = true;
+      
       // Subtract Case
       case "-":
         var answer = 0.0
@@ -125,6 +126,7 @@ class ViewController: UIViewController {
         label.text = String(answer)
         operation = ""
         needToClearScreen = true;
+      
       // Divide Case
       case "÷":
         var answer = 0.0
@@ -142,14 +144,15 @@ class ViewController: UIViewController {
         label.text = String(answer)
         operation = ""
         needToClearScreen = true;
+      
       // Multiply Case
       case "x":
         var answer = 0.0
-        for i in numbers{
-          if answer == 0.0{
-            answer = i
+        for number in numbers{
+          if answer == 0.0 {
+            answer = number
           }else{
-            answer = answer * i
+            answer = answer * number
           }
         }
         numbers = []
