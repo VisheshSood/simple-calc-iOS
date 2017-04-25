@@ -32,7 +32,7 @@ class HistoryTableViewController: UIViewController, UITableViewDataSource {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let destViewController : ViewController = segue.destination as! ViewController
-    destViewController.historyList = history
+    destViewController.historyArray = history
   }
   
   

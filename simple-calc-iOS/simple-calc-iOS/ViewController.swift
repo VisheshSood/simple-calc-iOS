@@ -18,9 +18,8 @@ class ViewController: UIViewController {
   var operation = ""
   var needToClearScreen = false;
   var count = 0;
-  var historyList = [String]()
-
-  var historyString = ""
+  var historyArray = [String]()
+  var historyValue = ""
   
   
   
@@ -55,10 +54,13 @@ class ViewController: UIViewController {
             factNumber -= 1
           }
         }
-        historyString = historyString + String(val) + "! = " + String(answer)
+        
         numbers = []
         label.text = String(answer)
+        historyValue = String(val) + "! = " + String(answer)
+        historyArray.append(historyValue)
         operation = ""
+        historyValue = ""
         needToClearScreen = true;
       }
     }
@@ -66,7 +68,7 @@ class ViewController: UIViewController {
     // The rest is considering that it is not a factorial.
     if sender.currentTitle != "Fact" {
       numbers.append(val)
-      historyString = "" + String(val);
+      historyValue = "" + String(val);
     }
     
     if (sender.currentTitle == "Count") {
@@ -82,17 +84,17 @@ class ViewController: UIViewController {
       case "Avg":
         var answer = 0.0
         let count:Double = Double(numbers.count)
-        historyString = "Avg: "
+        historyValue = "Avg("
         for number in numbers {
-          historyString = historyString + String(number) + " "
+          historyValue = historyValue + String(number) + " "
           answer = answer + number
         }
         answer = answer/count
         if answer.truncatingRemainder(dividingBy: 1) != 0{
           answer = answer.roundTo(places: 4)
-          historyString = historyString + " = " + String(answer)
+          historyValue = historyValue + ") = " + String(answer)
         }
-        historyString = historyString + " = " + String(answer)
+        historyValue = historyValue + ") = " + String(answer)
         numbers = []
         label.text = String(answer)
         operation = ""
@@ -106,11 +108,11 @@ class ViewController: UIViewController {
           count = count + 1;
           label.text = String(count)
         }
-        historyString = "Count: "
+        historyValue = "Count("
         for number in numbers {
-          historyString = historyString + String(number) + " "
+          historyValue = historyValue + String(number) + " "
         }
-        historyString = historyString + " = " + String(count)
+        historyValue = historyValue + ") = " + String(count)
         numbers = []
         count = 0
         operation = ""
@@ -118,13 +120,13 @@ class ViewController: UIViewController {
       
       // Mod Case
       case "Mod":
-        historyString = ""
+        historyValue = ""
         var answer = 0.0
         for i in 1...numbers.count{
           if i == numbers.count{
-            historyString = historyString+" \(numbers[i-1])"
+            historyValue = historyValue+" \(numbers[i-1])"
           }else{
-            historyString = historyString+" \(numbers[i-1]) " + operation
+            historyValue = historyValue+" \(numbers[i-1]) " + operation
           }
           
           if answer == 0.0{
@@ -136,7 +138,7 @@ class ViewController: UIViewController {
         if answer.truncatingRemainder(dividingBy: 1) != 0{
           answer = answer.roundTo(places: 8)
         }
-        historyString = historyString+" = "+"\(answer)"
+        historyValue = historyValue+" = "+"\(answer)"
         numbers = []
         label.text = String(answer)
         operation = ""
@@ -144,13 +146,13 @@ class ViewController: UIViewController {
       
       // Add Case
       case "+":
-        historyString = ""
+        historyValue = ""
         var answer = 0.0
         for i in 1...numbers.count{
           if i == numbers.count{
-            historyString = historyString+" \(numbers[i-1])"
+            historyValue = historyValue + " \(numbers[i-1])"
           }else{
-            historyString = historyString+" \(numbers[i-1]) "+operation
+            historyValue = historyValue + " \(numbers[i-1]) " + operation
           }
           
           if answer == 0.0{
@@ -162,7 +164,7 @@ class ViewController: UIViewController {
         if answer.truncatingRemainder(dividingBy: 1) != 0{
           answer = answer.roundTo(places: 8)
         }
-        historyString = historyString+" = "+"\(answer)"
+        historyValue = historyValue+" = "+"\(answer)"
         numbers = []
         label.text = String(answer)
         operation = ""
@@ -170,13 +172,13 @@ class ViewController: UIViewController {
       
       // Subtract Case
       case "-":
-        historyString = ""
+        historyValue = ""
         var answer = 0.0
         for i in 1...numbers.count{
           if i == numbers.count{
-            historyString = historyString+" \(numbers[i-1])"
+            historyValue = historyValue+" \(numbers[i-1])"
           }else{
-            historyString = historyString+" \(numbers[i-1]) " + operation
+            historyValue = historyValue+" \(numbers[i-1]) " + operation
           }
           
           if answer == 0.0{
@@ -188,7 +190,7 @@ class ViewController: UIViewController {
         if answer.truncatingRemainder(dividingBy: 1) != 0{
           answer = answer.roundTo(places: 8)
         }
-        historyString = historyString+" = "+"\(answer)"
+        historyValue = historyValue+" = "+"\(answer)"
         numbers = []
         label.text = String(answer)
         operation = ""
@@ -196,13 +198,13 @@ class ViewController: UIViewController {
       
       // Divide Case
       case "÷":
-        historyString = ""
+        historyValue = ""
         var answer = 0.0
         for i in 1...numbers.count{
           if i == numbers.count{
-            historyString = historyString + " \(numbers[i-1])"
+            historyValue = historyValue + " \(numbers[i-1])"
           }else{
-            historyString = historyString + " \(numbers[i-1]) " + operation
+            historyValue = historyValue + " \(numbers[i-1]) " + operation
           }
           
           
@@ -215,7 +217,7 @@ class ViewController: UIViewController {
         if answer.truncatingRemainder(dividingBy: 1) != 0{
           answer = answer.roundTo(places: 8)
         }
-        historyString = historyString+" = "+"\(answer)"
+        historyValue = historyValue+" = "+"\(answer)"
         numbers = []
         label.text = String(answer)
         operation = ""
@@ -223,14 +225,14 @@ class ViewController: UIViewController {
       
       // Multiply Case
       case "x":
-        historyString = ""
+        historyValue = ""
         var answer = 0.0
         for i in 1...numbers.count{
           
           if i == numbers.count{
-            historyString = historyString + " \(numbers[i-1])"
+            historyValue = historyValue + "\(numbers[i-1])"
           }else{
-            historyString = historyString + " \(numbers[i-1]) " + operation
+            historyValue = historyValue + "\(numbers[i-1]) " + operation
           }
           
           
@@ -243,7 +245,7 @@ class ViewController: UIViewController {
         if answer.truncatingRemainder(dividingBy: 1) != 0{
           answer = answer.roundTo(places: 8)
         }
-        historyString = historyString + " = " + "\(answer)"
+        historyValue = historyValue + " = " + "\(answer)"
         numbers = []
         label.text = String(answer)
         operation = ""
@@ -251,7 +253,9 @@ class ViewController: UIViewController {
       default:
         print("Failed...?")
       }
-      historyList.append(historyString)
+      if (historyValue != "") {
+        historyArray.append(historyValue)
+      }
     }
     
   }
@@ -271,7 +275,7 @@ class ViewController: UIViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let destViewController : HistoryTableViewController = segue.destination as! HistoryTableViewController
-    destViewController.history = historyList
+    destViewController.history = historyArray
   }
   
   override func didReceiveMemoryWarning() {

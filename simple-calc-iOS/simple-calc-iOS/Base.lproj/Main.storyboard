@@ -25,7 +25,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iO-ZD-ykb">
                                 <rect key="frame" x="0.0" y="38" width="368" height="66"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jre-f2-7US">
@@ -464,7 +464,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.039293081721789587" green="0.81863261010362698" blue="0.039983961103736337" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.042071210706367657" green="0.88119332901554404" blue="0.045026632173831731" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bSL-Yg-R3E" firstAttribute="top" secondItem="ckX-eG-ZnB" secondAttribute="bottom" constant="1" id="1R0-L7-LoM"/>
                             <constraint firstItem="ckX-eG-ZnB" firstAttribute="top" secondItem="g0u-r2-WDT" secondAttribute="bottom" constant="1" id="1cq-Av-KiY"/>
